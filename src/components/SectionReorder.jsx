@@ -29,37 +29,46 @@ function SortableItem({ id }) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    cursor: "grab",
   };
 
   return (
     <li
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
       className="list-group-item d-flex justify-content-between align-items-center"
     >
       {id.toUpperCase()}
-      <span className="text-muted">☰</span>
+
+      <span
+        {...attributes}
+        {...listeners}
+        style={{ cursor: "grab" }}
+        className="text-muted"
+      >
+        ☰
+      </span>
     </li>
   );
 }
 
+
 /* ---------- MAIN COMPONENT ---------- */
 export default function SectionReorder({ sections, setSections }) {
   /* ✅ Sensors (DESKTOP + MOBILE) */
-  const sensors = useSensors(
-    useSensor(PointerSensor, {
-      activationConstraint: { distance: 5 },
-    }),
-    useSensor(TouchSensor, {
-      activationConstraint: {
-        delay: 200,
-        tolerance: 5,
-      },
-    })
-  );
+ const sensors = useSensors(
+  useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 8,
+    },
+  }),
+  useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 250, // long press
+      tolerance: 10,
+    },
+  })
+);
+
 
   /* ✅ Drag End Handler */
   const handleDragEnd = (event) => {
