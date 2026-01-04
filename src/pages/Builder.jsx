@@ -123,7 +123,7 @@ const [sections, setSections] = useState([
         
       <div className="row">
 
-        {/* FORM SECTION */}
+ {/* FORM SECTION */}
 
        <div
   className="col-md-6 overflow-auto"
@@ -355,21 +355,63 @@ const [sections, setSections] = useState([
   + Add Experience
 </button>
 
- {/*Skills */}
-    <h5 className="mt-4">Skills</h5>
-          <input
-            className="form-control mb-3"
-            placeholder="Add skill & press Enter"
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                setResume({
-                  ...resume,
-                  skills: [...resume.skills, e.target.value]
-                });
-                e.target.value = "";
-              }
-            }}
-          />
+ <h5 className="mt-4">Skills</h5>
+
+{/* ADD SKILL */}
+<input
+  className="form-control mb-3"
+  placeholder="Add skill & press Enter / Done"
+  enterKeyHint="done"
+  onKeyDown={(e) => {
+    if (e.key === "Enter" && e.target.value.trim()) {
+      e.preventDefault();
+      setResume({
+        ...resume,
+        skills: [...resume.skills, e.target.value.trim()],
+      });
+      e.target.value = "";
+    }
+  }}
+  onBlur={(e) => {
+    if (e.target.value.trim()) {
+      setResume({
+        ...resume,
+        skills: [...resume.skills, e.target.value.trim()],
+      });
+      e.target.value = "";
+    }
+  }}
+/>
+
+{/* EDITABLE SKILLS */}
+<div className="d-flex flex-wrap gap-2">
+  {resume.skills.map((skill, index) => (
+    <span
+      key={index}
+      className="badge bg-primary d-flex align-items-center gap-2"
+    >
+      <input
+        className="border-0 bg-transparent text-white"
+        style={{ width: "auto", minWidth: "40px" }}
+        value={skill}
+        onChange={(e) => {
+          const updated = [...resume.skills];
+          updated[index] = e.target.value;
+          setResume({ ...resume, skills: updated });
+        }}
+      />
+
+      <button
+        type="button"
+        className="btn-close btn-close-white btn-sm"
+        onClick={() => {
+          const updated = resume.skills.filter((_, i) => i !== index);
+          setResume({ ...resume, skills: updated });
+        }}
+      />
+    </span>
+  ))}
+</div>
 
  {/* Projects */}
         <h5 className="mt-4">Projects</h5>
