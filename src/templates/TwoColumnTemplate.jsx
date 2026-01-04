@@ -138,31 +138,32 @@ function TwoColumnModernTemplate({ resume, sections = [] }) {
       {/* ================= TWO COLUMNS ================= */}
       <div className="row">
 
-        {/* LEFT COLUMN */}
-        <div className="col-md-5">
-          {sections
-            .filter(sec => ["skills", "certifications"].includes(sec))
-            .map(section => (
-              <div key={section}>
-                {renderSection(section)}
-              </div>
-            ))}
+  {/* LEFT COLUMN */}
+  <div className="col-5 col-md-5">
+    {sections
+      .filter(sec => ["skills", "certifications"].includes(sec))
+      .map(section => (
+        <div key={section} className="mb-3">
+          {renderSection(section)}
         </div>
+      ))}
+  </div>
 
-        {/* RIGHT COLUMN */}
-        <div className="col-md-7">
-          {sections
-            .filter(sec =>
-              ["summary", "experience", "education", "projects"].includes(sec)
-            )
-            .map(section => (
-              <div key={section}>
-                {renderSection(section)}
-              </div>
-            ))}
+  {/* RIGHT COLUMN */}
+  <div className="col-7 col-md-7">
+    {sections
+      .filter(sec =>
+        ["summary", "experience", "education", "projects"].includes(sec)
+      )
+      .map(section => (
+        <div key={section} className="mb-3">
+          {renderSection(section)}
         </div>
+      ))}
+  </div>
 
-      </div>
+</div>
+
     </div>
   );
 }
