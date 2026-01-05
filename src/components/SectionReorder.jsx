@@ -39,11 +39,12 @@ function SortableItem({ id }) {
     >
       {id.toUpperCase()}
 
+      {/* Drag Handle */}
       <span
         {...attributes}
         {...listeners}
-        style={{ cursor: "grab" }}
-        className="text-muted"
+        className="drag-handle"
+        style={{ cursor: "grab", fontSize: "1.2rem" }}
       >
         ☰
       </span>
@@ -51,29 +52,22 @@ function SortableItem({ id }) {
   );
 }
 
-
 /* ---------- MAIN COMPONENT ---------- */
-export default function SectionReorder({ sections, setSections }) {
-  /* ✅ Sensors (DESKTOP + MOBILE) */
- const sensors = useSensors(
-  useSensor(PointerSensor, {
-    activationConstraint: {
-      distance: 8,
-    },
-  }),
-  useSensor(TouchSensor, {
-    activationConstraint: {
-      delay: 250, // long press
-      tolerance: 10,
-    },
-  })
-);
+export default function SectionReorder({ sections, setSections, darkMode }) {
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: { distance: 8 },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 250,
+        tolerance: 10,
+      },
+    })
+  );
 
-
-  /* ✅ Drag End Handler */
   const handleDragEnd = (event) => {
     const { active, over } = event;
-
     if (!over || active.id === over.id) return;
 
     setSections((prev) => {
@@ -84,21 +78,29 @@ export default function SectionReorder({ sections, setSections }) {
   };
 
   return (
-    <DndContext
-      sensors={sensors}
-      collisionDetection={closestCenter}
-      onDragEnd={handleDragEnd}
+    <div
+      className={
+        darkMode
+          ? "section-reorder-dark"
+          : "section-reorder-light"
+      }
     >
-      <SortableContext
-        items={sections}
-        strategy={verticalListSortingStrategy}
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
       >
-        <ul className="list-group">
-          {sections.map((section) => (
-            <SortableItem key={section} id={section} />
-          ))}
-        </ul>
-      </SortableContext>
-    </DndContext>
+        <SortableContext
+          items={sections}
+          strategy={verticalListSortingStrategy}
+        >
+          <ul className="list-group">
+            {sections.map((section) => (
+              <SortableItem key={section} id={section} />
+            ))}
+          </ul>
+        </SortableContext>
+      </DndContext>
+    </div>
   );
 }

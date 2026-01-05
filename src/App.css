@@ -87,3 +87,26 @@ body {
   -webkit-user-select: none;
   user-select: none;
 }
+
+/* ---------- Section Reorder ---------- */
+
+.section-reorder-dark .list-group-item {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #333 !important;
+}
+
+.section-reorder-light .list-group-item {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #ddd !important;
+}
+
+/* Drag handle */
+.section-reorder-dark .drag-handle {
+  color: #aaa;
+}
+
+.section-reorder-light .drag-handle {
+  color: #666;
+}

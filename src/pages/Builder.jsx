@@ -536,6 +536,7 @@ const [sections, setSections] = useState([
 <SectionReorder
   sections={sections}
   setSections={setSections}
+  darkMode={darkMode}
 />
 
         </div>
