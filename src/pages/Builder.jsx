@@ -10,7 +10,7 @@ import SectionReorder from "../components/SectionReorder";
  function Builder({ darkMode, setDarkMode }) {
   const resumeRef = useRef();
 
-  const [template, setTemplate] = useState("classic"); // ✅ FIXED
+  const [template, setTemplate] = useState("classic"); // FIXED
 
   const [resume, setResume] = useState({
     name: "",
@@ -37,7 +37,7 @@ import SectionReorder from "../components/SectionReorder";
 ]
   });
 
-{/* DND kit - Drag and drop state  */}
+// DND kit - Drag and drop state  
 const [sections, setSections] = useState([
   "summary",
   "education",
@@ -47,20 +47,18 @@ const [sections, setSections] = useState([
   "certifications"
 ]);
 
-
-
-  {/* PDF Download */}
+  // PDF Download 
  
   const downloadPDF = async () => {
   const element = resumeRef.current;
   const appRoot = document.querySelector(".dark-mode");
 
-  // 1️⃣ Temporarily disable dark mode (UI)
+  //  Temporarily disable dark mode (UI)
   if (appRoot) {
     appRoot.classList.remove("dark-mode");
   }
 
-  // 2️⃣ Force light styles only for resume
+  //  Force light styles only for resume
   element.classList.add("force-light");
 
   // Give browser time to apply styles
@@ -79,14 +77,15 @@ const [sections, setSections] = useState([
   const pageHeight = pdf.internal.pageSize.getHeight();
 
   const imgHeight = (canvas.height * pageWidth) / canvas.width;
-  let heightLeft = imgHeight;
+
+  let heightLeft = imgHeight; // let is used for reassignment of var
   let position = 0;
 
-  // 3️⃣ First page
+  //  First page
   pdf.addImage(imgData, "PNG", 0, position, pageWidth, imgHeight);
   heightLeft -= pageHeight;
 
-  // 4️⃣ Extra pages (if resume is long)
+  //  Extra pages (if resume is long)
   while (heightLeft > 0) {
     position -= pageHeight;
     pdf.addPage();
@@ -96,7 +95,7 @@ const [sections, setSections] = useState([
 
   pdf.save("Resume.pdf");
 
-  // 5️⃣ Restore UI state
+  //  Restore UI state
   element.classList.remove("force-light");
   if (appRoot) {
     appRoot.classList.add("dark-mode");
@@ -104,14 +103,12 @@ const [sections, setSections] = useState([
 };
 
 
-
-
-{/* UI Rendering */}
+// UI Rendering 
   return (
     
-    <div className="container mt-4">
+<div className="container mt-4">
 
- {/* DARK MODE TOGGLE  */}
+ {/* DARK MODE TOGGLE */}
     <div className="d-flex justify-content-end mb-3">
       <button
         className="btn btn-sm btn-outline-secondary"
@@ -120,14 +117,15 @@ const [sections, setSections] = useState([
         {darkMode ? "Light Mode ☀️" : "Dark Mode 🌙"}
       </button>
     </div>
-        
-      <div className="row">
 
- {/* FORM SECTION */}
+
+  {/* FORM SECTION */} 
+
+
+  <div className="row">
 
        <div
-  className="col-md-6 overflow-auto"
-  style={{ height: "100vh" }}
+  className="col-md-6 overflow-auto vh-100"
 >
 
 {/* Basic Details */} 
@@ -355,15 +353,15 @@ const [sections, setSections] = useState([
   + Add Experience
 </button>
 
+{/* ADD SKILLs */}
  <h5 className="mt-4">Skills</h5>
 
-{/* ADD SKILL */}
 <input
   className="form-control mb-3"
   placeholder="Add skill & press Enter / Done"
-  enterKeyHint="done"
+  enterKeyHint="done" //for mobile 
   onKeyDown={(e) => {
-    if (e.key === "Enter" && e.target.value.trim()) {
+    if (e.key === "Enter" && e.target.value.trim()) {        // for keyboard
       e.preventDefault();
       setResume({
         ...resume,
@@ -372,7 +370,7 @@ const [sections, setSections] = useState([
       e.target.value = "";
     }
   }}
-  onBlur={(e) => {
+  onBlur={(e) => {              //for mobile devices
     if (e.target.value.trim()) {
       setResume({
         ...resume,
@@ -384,16 +382,17 @@ const [sections, setSections] = useState([
 />
 
 {/* EDITABLE SKILLS */}
+
 <div className="d-flex flex-wrap gap-2">
   {resume.skills.map((skill, index) => (
     <span
       key={index}
-      className="badge bg-primary d-flex align-items-center gap-2"
+      className="badge bg-primary d-inline-flex align-items-center gap-2 w-auto"
     >
       <input
-        className="border-0 bg-transparent text-white"
-        style={{ width: "auto", minWidth: "40px" }}
+        className="border-0 bg-transparent text-white w-auto"
         value={skill}
+        size={skill.length || 1}
         onChange={(e) => {
           const updated = [...resume.skills];
           updated[index] = e.target.value;
@@ -412,6 +411,7 @@ const [sections, setSections] = useState([
     </span>
   ))}
 </div>
+
 
  {/* Projects */}
         <h5 className="mt-4">Projects</h5>
@@ -444,6 +444,7 @@ const [sections, setSections] = useState([
     <textarea
       className="form-control"
       placeholder="Description"
+      rows="3"
       value={proj.description}
       onChange={(e) => {
         const newProj = [...resume.projects];
@@ -531,6 +532,7 @@ const [sections, setSections] = useState([
   + Add Certification
 </button>
 
+{/*Section Reorder */}
 <h5 className="mt-3">Reorder Sections</h5>
 
 <SectionReorder
@@ -539,16 +541,15 @@ const [sections, setSections] = useState([
   darkMode={darkMode}
 />
 
-        </div>
+</div>
 
  
-
-  {/* PREVIEW SECTION */}
-        <div className="col-md-6">
-      <div className="preview-sticky">
+{/* PREVIEW SECTION */}
+    <div className="col-md-6 vh-100 overflow-auto">
+    <div className="preview-sticky">
 
   {/* ✅ HEADING */}
-    <h5 className="fw-semibold mb-1 text-dark">
+    <h5 className="fw-semibold mb-1">
       Select Resume Template:
     </h5>
 
@@ -579,6 +580,7 @@ const [sections, setSections] = useState([
 </div>
 </div>
 </div>
+
   );
 }
 
