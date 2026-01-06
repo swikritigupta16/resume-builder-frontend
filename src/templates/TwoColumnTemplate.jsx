@@ -110,11 +110,11 @@ function TwoColumnModernTemplate({ resume, sections = [] }) {
         {resume.name || "Your Name"}
       </h2>
 
-      <p className="mb-2 text-break">
+      <span className="mb-2 text-break">
         {resume.email}
         {resume.phone && <> | {resume.phone}</>}
         {resume.address && <> | {resume.address}</>}
-      </p>
+      </span>
 
       {/* ================= PROFILES ================= */}
      {resume.profiles.github && (

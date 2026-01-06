@@ -101,23 +101,15 @@ return (
   <div className="border p-4 rounded" style={{ fontFamily: "Arial" }}>
 
     {/* HEADER */}
-    <h2 className="mb-1">
-  <span
-    style={{
-      color: "#0d6efd",
-      fontWeight: "700",
-      display: "inline-block"
-    }}
-  >
-    {resume.name || "Your Name"}
-  </span>
-</h2>
+     <h2 className="text-primary mb-2 fw-bold">
+        {resume.name || "Your Name"}
+      </h2>
 
-    <p className="contact-info">
+    <span className="contact-info">
       {resume.email}
       {resume.phone && <> | {resume.phone}</>}
       {resume.address && <> | {resume.address}</>}
-    </p>
+    </span>
 
     {/* PROFILES (ALWAYS ON TOP, NOT REORDERED) */}
     
@@ -130,7 +122,7 @@ return (
   </p>
 )}
 
-{resume.profiles.linkedin && (
+ {resume.profiles.linkedin && (
   <p className="mb-3">
     <strong>LinkedIn:</strong>{" "}
     <span className="text-break">

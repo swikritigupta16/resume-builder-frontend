@@ -99,10 +99,10 @@ function ClassicTemplate({ resume, sections }) {
   <div className="border p-4 rounded" style={{ fontFamily: "Arial" }}>
 
     {/* HEADER */}
-    <h2 className="mb-1">{resume.name || "Your Name"}</h2>
-    <p className="mb-1">{resume.email}</p>
-    <p className="mb-1">{resume.phone}</p>
-    <p className="mb-3">{resume.address}</p>
+    <h2 className="mb-2">{resume.name || "Your Name"}</h2>
+    <h6 className="mb-1">{resume.email}</h6>
+    <h6 className="mb-1">{resume.phone}</h6>
+    <h6 className="mb-3">{resume.address}</h6>
    
     {/* Profiles (ALWAYS ON TOP) */}
  {resume.profiles.github && (
