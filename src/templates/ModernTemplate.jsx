@@ -113,9 +113,6 @@ return (
   </span>
 </h2>
 
-
-
-
     <p className="contact-info">
       {resume.email}
       {resume.phone && <> | {resume.phone}</>}
@@ -143,7 +140,7 @@ return (
 )}
 
 
-    {/* 🔄 REORDERABLE SECTIONS */}
+    {/* REORDERABLE SECTIONS */}
     {sections.map((section) => (
       <div key={section}>
         {renderSection(section)}
@@ -152,7 +149,6 @@ return (
 
   </div>
 );
-
 
 }
 

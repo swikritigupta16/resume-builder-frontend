@@ -359,7 +359,7 @@ const [sections, setSections] = useState([
 <input
   className="form-control mb-3"
   placeholder="Add skill & press Enter / Done"
-  enterKeyHint="done" //for mobile 
+  enterKeyHint="done" //mobile 
   onKeyDown={(e) => {
     if (e.key === "Enter" && e.target.value.trim()) {        // for keyboard
       e.preventDefault();

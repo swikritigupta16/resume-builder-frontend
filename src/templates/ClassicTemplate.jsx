@@ -124,7 +124,7 @@ function ClassicTemplate({ resume, sections }) {
 )}
 
 
-    {/* 🔥 SECTION REORDER RENDER */}
+    {/* SECTION REORDER RENDER */}
     {sections.map((section) => (
       <div key={section}>
         {renderSection(section)}

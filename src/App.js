@@ -8,9 +8,7 @@ function App() {
   return localStorage.getItem("darkMode") === "true";
 });
 
-
-  
-  // ✅ Save preference whenever it changes
+  // Save preference whenever it changes
   useEffect(() => {
     localStorage.setItem("darkMode", darkMode);
   }, [darkMode]);
@@ -22,7 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route
             path="/builder"
-            element={
+            element={ 
               <Builder
                 darkMode={darkMode}
                 setDarkMode={setDarkMode}

@@ -11,13 +11,8 @@ body {
 }
 
 /* Builder page */
-.dark-mode .builder-container {
+.dark-mode .builder-container .resume-preview{
   background-color: #1e1e1e;
-}
-
-/* Resume preview */
-.dark-mode .resume-preview {
-  background-color: #1f1f1f;
   color: #ffffff;
 }
 
@@ -39,7 +34,7 @@ body {
 /* Placeholder text */
 .dark-mode input::placeholder,
 .dark-mode textarea::placeholder {
-  color: #aaaaaa;           /*  PLACEHOLDER */
+  color: #aaaaaa;           
 }
 
 /* On focus */
@@ -65,12 +60,6 @@ body {
   border-color: #dddddd !important;
 }
 
-/* Links & highlights */
-.force-light h1,
-.force-light h2,
-.force-light h3 {
-  color: #000000 !important;
-}
 
 .preview-sticky {
   position: sticky;
