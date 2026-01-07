@@ -9,7 +9,7 @@ A frontend resume builder application that allows users to create, preview, cust
 
 ## Features
 - Interactive resume form with real-time preview
-- Multiple professional resume templates (Classic, Modern, Two-Column)
+- Multiple professional resume templates 
 - Drag-and-drop section reordering using dnd-kit
 - Custom sections support – users can add sections based on their needs
 - Light / Dark mode for better accessibility
