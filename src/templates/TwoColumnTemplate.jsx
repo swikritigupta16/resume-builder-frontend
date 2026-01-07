@@ -97,6 +97,26 @@ function TwoColumnModernTemplate({ resume, sections = [] }) {
           </>
         );
 
+{/* Custom Sections (Left Column) */}
+        case "custom":
+          return resume.customSections?.some(
+             sec => sec.title || sec.content
+         ) && (
+      <>
+     {resume.customSections.map((sec) => (
+      <div key={sec.id} className="mb-3">
+        {sec.title && (
+          <strong className="mt-3 text-primary">
+            {sec.title}
+          </strong>
+        )}
+        {sec.content && <p>{sec.content}</p>}
+      </div>
+     ))}
+      </>
+         );
+
+
       default:
         return null;
     }
@@ -118,7 +138,7 @@ function TwoColumnModernTemplate({ resume, sections = [] }) {
 
       {/* ================= PROFILES ================= */}
      {resume.profiles.github && (
-  <p className="mb-1">
+  <p className = "mb-1">
     <strong>GitHub:</strong>{" "}
     <span className="text-break">
       {resume.profiles.github}
@@ -127,7 +147,7 @@ function TwoColumnModernTemplate({ resume, sections = [] }) {
 )}
 
 {resume.profiles.linkedin && (
-  <p className="mb-3">
+  <p className = "mb-3" >
     <strong>LinkedIn:</strong>{" "}
     <span className="text-break">
       {resume.profiles.linkedin}
@@ -141,7 +161,7 @@ function TwoColumnModernTemplate({ resume, sections = [] }) {
   {/* LEFT COLUMN */}
   <div className="col-5 col-md-5">
     {sections
-      .filter(sec => ["skills", "certifications"].includes(sec))
+      .filter(sec => ["skills", "certifications", "custom"].includes(sec))
       .map(section => (
         <div key={section} className="mb-3">
           {renderSection(section)}

@@ -33,8 +33,10 @@ import SectionReorder from "../components/SectionReorder";
       {title: "", technology: "", description: "" }
     ],
     certifications: [
-    { name: "", organization: "", year: "" }
-]
+    { name: "", organization: "", year: "" },
+    ],
+    customSections: []
+   
   });
 
 // DND kit - Drag and drop state  
@@ -44,7 +46,8 @@ const [sections, setSections] = useState([
   "experience",
   "skills",
   "projects",
-  "certifications"
+  "certifications",
+  "custom"
 ]);
 
   // PDF Download 
@@ -531,6 +534,55 @@ const [sections, setSections] = useState([
 >
   + Add Certification
 </button>
+
+{/* Custom Section */}
+<h5 className="mt-4">Custom Sections</h5>
+
+{resume.customSections.map((section, index) => (
+  <div key={section.id} className="border p-2 mb-3 rounded">
+
+    <input
+      className="form-control mb-2"
+      placeholder="Section Title (e.g. Awards)"
+      value={section.title}
+      onChange={(e) => {
+        const updated = [...resume.customSections];
+        updated[index].title = e.target.value;
+        setResume({ ...resume, customSections: updated });
+      }}
+    />
+
+    <textarea
+      className="form-control"
+      placeholder="Section Content"
+      rows="3"
+      value={section.content}
+      onChange={(e) => {
+        const updated = [...resume.customSections];
+        updated[index].content = e.target.value;
+        setResume({ ...resume, customSections: updated });
+      }}
+    />
+
+  </div>
+))}
+
+<button
+  className="btn btn-sm btn-outline-primary mb-2"
+  onClick={() =>
+    setResume({
+      ...resume,
+      customSections: [
+        ...resume.customSections,
+        { id: Date.now(), title: "", content: "" }
+      ]
+    })
+  }
+>
+  + Add Custom Section
+</button>
+
+
 
 {/*Section Reorder */}
 <h5 className="mt-3">Reorder Sections</h5>

@@ -16,7 +16,7 @@ import {
 
 import { CSS } from "@dnd-kit/utilities";
 
-/* ---------- SORTABLE ITEM ---------- */
+/* ---------- SORTABLE ITEM Component---------- */
 function SortableItem({ id }) {
   const {
     attributes,

@@ -89,6 +89,21 @@ function ClassicTemplate({ resume, sections }) {
         </>
       );
 
+      case "custom":
+        return resume.customSections?.some(
+          sec => sec.title || sec.content
+        ) && (
+          <>
+            {resume.customSections.map(sec => (
+              <div key={sec.id}>
+                {sec.title && <strong className="mt-3">{sec.title}</strong>}
+                {sec.content && <p>{sec.content}</p>}
+              </div>
+            ))}
+          </>
+        );
+
+
     default:
       return null;
   }

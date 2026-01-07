@@ -6,7 +6,7 @@ function ModernTemplate({ resume, sections = [] }) {
       return resume.summary && (
         <>
           <strong className="mt-4 text-primary">Professional Summary</strong>
-          <p align="justify" className="mt-2">{resume.summary}</p>
+          <p align="justify">{resume.summary}</p>
         </>
       );
 
@@ -92,6 +92,25 @@ function ModernTemplate({ resume, sections = [] }) {
         </>
       );
 
+      
+  {/*Custom Section */}
+  case "custom":
+   return resume.customSections?.some(
+  sec => sec.title || sec.content
+) && (
+  <>
+    {resume.customSections.map((sec) => (
+      <div key={sec.id} className="mb-3">
+        {sec.title && (
+          <strong className="mt-3 text-primary">{sec.title}</strong>
+        )}
+        {sec.content && <p>{sec.content}</p>}
+      </div>
+    ))}
+  </>
+);
+
+ 
     default:
       return null;
   }
