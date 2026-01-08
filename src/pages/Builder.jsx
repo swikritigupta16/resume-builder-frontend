@@ -5,15 +5,14 @@ import { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import SectionReorder from "../components/SectionReorder";
+import { useEffect } from "react";
 
+const STORAGE_KEY = "resume_builder_data";
+const TEMPLATE_KEY = "resume_template";
+const SECTION_KEY = "resume_sections";
 
- function Builder({ darkMode, setDarkMode }) {
-  const resumeRef = useRef();
-
-  const [template, setTemplate] = useState("classic"); // FIXED
-
-  const [resume, setResume] = useState({
-    name: "",
+const initialResume = {
+   name: "",  
     email: "",
     phone: "",
     address : "",
@@ -36,11 +35,38 @@ import SectionReorder from "../components/SectionReorder";
     { name: "", organization: "", year: "" },
     ],
     customSections: []
+};
+
+
+ function Builder({ darkMode, setDarkMode }) {
+  
+  const resumeRef = useRef();
+
+  const [template, setTemplate] = useState(() => {
+    return localStorage.getItem(TEMPLATE_KEY) || "classic";   //saved template or default
+  });
+  
+  useEffect(() => {
+  localStorage.setItem(TEMPLATE_KEY, template);
+}, [template]);
+
+  const [resume, setResume] = useState(() =>{   
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : initialResume        //lazy initializer for useState
    
   });
 
-// DND kit - Drag and drop state  
-const [sections, setSections] = useState([
+  useEffect(() => {                                             //saving data if any
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(resume));
+}, [resume]);
+
+
+// DND kit - Drag and drop state 
+const [sections, setSections] = useState(() => {
+  const saved = localStorage.getItem(SECTION_KEY);
+  return saved
+    ? JSON.parse(saved)
+    :  [
   "summary",
   "education",
   "experience",
@@ -48,10 +74,26 @@ const [sections, setSections] = useState([
   "projects",
   "certifications",
   "custom"
-]);
+];
+ });
+
+ useEffect(() => {
+  localStorage.setItem(SECTION_KEY, JSON.stringify(sections));
+}, [sections]);
+
+
+//clear data
+const clearResume = () => {
+  if (!window.confirm("Are you sure you want to clear the resume?")) return;
+
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(SECTION_KEY);
+  localStorage.removeItem(TEMPLATE_KEY);
+  window.location.reload();
+};
+
 
   // PDF Download 
- 
   const downloadPDF = async () => {
   const element = resumeRef.current;
   const appRoot = document.querySelector(".dark-mode");
@@ -583,7 +625,6 @@ const [sections, setSections] = useState([
 </button>
 
 
-
 {/*Section Reorder */}
 <h5 className="mt-3">Reorder Sections</h5>
 
@@ -627,6 +668,16 @@ const [sections, setSections] = useState([
   >
     Download Resume as PDF
   </button>
+
+{/* Clear resume button*/}
+<button
+  className="btn btn-outline-danger mt-3 w-100"
+  onClick={clearResume}
+  disabled={JSON.stringify(resume) === JSON.stringify(initialResume)}
+>
+  🗑️ Clear Resume
+</button>
+
 
 </div>
 </div>

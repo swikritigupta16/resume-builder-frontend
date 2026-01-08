@@ -5,7 +5,7 @@ function ClassicTemplate({ resume, sections }) {
       return resume.summary && (
         <>
            <strong className="mt-3">Professional Summary  </strong>
-          <p align="justify" className="mb-3 mt-2">{resume.summary}</p>
+          <p align="justify" className="mb-3">{resume.summary}</p>
         </>
       );
 
