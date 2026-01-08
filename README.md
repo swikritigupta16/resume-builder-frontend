@@ -8,11 +8,12 @@ A frontend resume builder application that allows users to create, preview, cust
 
 
 ## Features
-- Resume form with live preview
-- Multiple resume templates
-- PDF download
-- Light/Dark Mode
-- Section Reorder
+- Interactive resume form with real-time preview
+- Multiple professional resume templates 
+- Drag-and-drop section reordering using dnd-kit
+- Custom sections support – users can add sections based on their needs
+- Light / Dark mode for better accessibility
+- Export resume as downloadable PDF
   
 =======
 # Getting Started with Create React App
