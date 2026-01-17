@@ -1,0 +1,118 @@
+/* Default (Light mode) */
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+/* Dark mode wrapper */
+.dark-mode {
+  background-color: #121212;
+  color: #eaeaea;
+}
+
+/* Builder page */
+.dark-mode .builder-container .resume-preview{
+  background-color: #1e1e1e;
+  color: #ffffff;
+}
+
+
+/* Buttons */
+.dark-mode .btn-primary {
+  background-color: #0d6efd;
+}
+
+/* Dark mode inputs */
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background-color: #2a2a2a;
+  color: #ffffff;           /*  TEXT COLOR */
+  border: 1px solid #444;
+}
+
+/* Placeholder text */
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+  color: #aaaaaa;           
+}
+
+/* On focus */
+.dark-mode input:focus,
+.dark-mode textarea:focus,
+.dark-mode select:focus {
+  background-color: #2a2a2a;
+  color: #ffffff;
+  border-color: #0d6efd;
+  box-shadow: none;
+}
+
+.dark-mode .contact-info {
+  color: #bdbdbd;
+  opacity: 0.95;
+}
+
+/* Always light resume for PDF */
+.force-light
+ {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #dddddd !important;
+}
+
+
+.preview-sticky {
+  position: sticky;
+  top: 20px;
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 10px;
+  
+}
+
+/* Required for dnd-kit mobile drag */
+.list-group-item {
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ---------- Section Reorder ---------- */
+
+.section-reorder-dark .list-group-item {
+  background-color: #1e1e1e !important;
+  color: #f1f1f1 !important;
+  border: 1px solid #333 !important;
+}
+
+.section-reorder-light .list-group-item {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #ddd !important;
+}
+
+/* Drag handle */
+.section-reorder-dark .drag-handle {
+  color: #aaa;
+}
+
+.section-reorder-light .drag-handle {
+  color: #666;
+}
+
+
+.resume-section {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin-bottom: 12px;
+}
+
+.section-header {
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+
+@page {
+  margin: 20mm 15mm;
+}
